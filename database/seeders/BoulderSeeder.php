@@ -2,19 +2,18 @@
 
 namespace Database\Seeders;
 
+use App\Models\Boulder;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class BoulderSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
-        $this->call([
-            BoulderSeeder::class,
-        ]);
+        Boulder::factory()->count(10)->create();
     }
 }
