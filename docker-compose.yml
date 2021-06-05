@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+    app:
+        container_name: app
+        build:
+            args:
+                user: ethan
+                uid: 2021
+            context: ./docker
+            dockerfile: Dockerfile
+        volumes:
+            - ./:/var/www
+        networks:
+            - sisyphus
+
+    nginx:
+        container_name: nginx
+        image: nginx:1.19
+        ports:
+            - 8080:80
+        volumes:
+            - ./docker/nginx:/etc/nginx/conf.d
+            - ./:/var/www
+        networks:
+            - sisyphus
+
+    mysql:
+        container_name: mysql
+        image: mysql:5.7
+        environment:
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_USER: ${DB_USERNAME}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+        ports:
+            - 6603:3306
+        volumes:
+            - ./docker/mysql:/var/lib/mysql
+        networks:
+            - sisyphus
+
+networks:
+    sisyphus:
+        driver: bridge
