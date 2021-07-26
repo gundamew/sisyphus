@@ -24,16 +24,47 @@ $ docker-compose up -d
 $ docker-compose exec app composer install
 ```
 
-### 4. Generate a unique application key
+### 4. Setting up the environment configuration file
+
+```shell
+$ cp .env.example .env
+```
+
+Please use the settings below:
+
+```
+APP_NAME=Sisyphus
+APP_ENV=local
+APP_KEY=
+APP_DEBUG=true
+APP_URL=http://localhost:8080
+
+LOG_CHANNEL=daily
+LOG_LEVEL=debug
+
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=homestead
+DB_USERNAME=homestead
+DB_PASSWORD=secret
+
+CACHE_DRIVER=redis
+REDIS_HOST=redis
+REDIS_PASSWORD=null
+REDIS_PORT=9736
+```
+
+### 5. Generate a unique application key
 
 ```shell
 $ docker-compose exec app php artisan key:generate
 ```
 
-### 5. Running migrations
+### 6. Running migrations
 
 ```shell
 $ docker-compose exec app php artisan migrate:fresh --seed
 ```
 
-### 6. Use `http://localhost:8080` to access the application.
+### 7. Use `http://localhost:8080` to access the application.
