@@ -50,9 +50,11 @@ DB_USERNAME=homestead
 DB_PASSWORD=secret
 
 CACHE_DRIVER=redis
+REDIS_CLIENT=phpredis
+
 REDIS_HOST=redis
 REDIS_PASSWORD=null
-REDIS_PORT=9736
+REDIS_PORT=6379
 ```
 
 ### 5. Generate a unique application key
@@ -64,7 +66,7 @@ $ docker-compose exec app php artisan key:generate
 ### 6. Running migrations
 
 ```shell
-$ docker-compose exec app php artisan migrate:fresh --seed
+$ docker-compose exec app php artisan migrate
 ```
 
 ### 7. Use `http://localhost:8080` to access the application.
