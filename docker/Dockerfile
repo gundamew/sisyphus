@@ -15,7 +15,9 @@ RUN apt-get update \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
-RUN docker-php-ext-install mysqli pdo_mysql opcache zip
+RUN pecl install redis-5.3.4 \
+    && docker-php-ext-install mysqli pdo_mysql opcache zip \
+    && docker-php-ext-enable redis
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
